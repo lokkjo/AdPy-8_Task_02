@@ -21,16 +21,17 @@ class CountryLinkMaker:
             self.country = self.country_list[self.counter]
             self.output[self.country] = f'{self.url}' \
                                         f'{self.country.replace(" ", "_")}'
-            with open('links_output.json', 'w',
-                      encoding='utf-8') as output_file:
-                json.dump(self.output, output_file,
-                          ensure_ascii=False,
-                          indent=2)
             self.counter += 1
             return f'{self.country}: ' \
                    f'{self.url}{self.country.replace(" ", "_")}'
         except IndexError:
             raise StopIteration
+        finally:
+            with open('links_output.json', 'w',
+                      encoding='utf-8') as output_file:
+                json.dump(self.output, output_file,
+                          ensure_ascii=False,
+                          indent=2)
 
 
 if __name__ == '__main__':
